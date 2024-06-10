@@ -1,4 +1,3 @@
-import * as React from "react";
 import { PaletteMode } from "@mui/material";
 import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
@@ -12,32 +11,25 @@ import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import ToggleColorMode from "../ui/ToogleColorMode.component";
-import XIcon from "@mui/icons-material/X"; // import Logo from "../../assets/images/logo.png";
-// import SitemarkIcon from "../../assets/SitemarkIcon.js";
+import XIcon from "@mui/icons-material/X";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 interface AppAppBarProps {
   mode: PaletteMode;
   toggleColorMode: () => void;
 }
 
-export default function AppAppBar({ mode, toggleColorMode }: AppAppBarProps) {
-  const [open, setOpen] = React.useState(false);
-
+export default function Header({ mode, toggleColorMode }: AppAppBarProps) {
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
   };
 
-  const scrollToSection = (sectionId: string) => {
-    const sectionElement = document.getElementById(sectionId);
-    const offset = 128;
-    if (sectionElement) {
-      const targetScroll = sectionElement.offsetTop - offset;
-      sectionElement.scrollIntoView({ behavior: "smooth" });
-      window.scrollTo({
-        top: targetScroll,
-        behavior: "smooth",
-      });
-      setOpen(false);
-    }
+  const navigateToSection = (sectionId: string) => {
+    navigate(sectionId);
+    setOpen(false);
   };
 
   return (
@@ -76,45 +68,49 @@ export default function AppAppBar({ mode, toggleColorMode }: AppAppBarProps) {
           <Box
             sx={{ flexGrow: 1, display: "flex", alignItems: "center", px: 0 }}
           >
-            <XIcon fontSize="large" sx={{ paddingRight: "1em" }} />
+            <XIcon
+              fontSize="large"
+              sx={{ paddingRight: "1em" }}
+              onClick={() => navigateToSection("/")}
+            />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               <Button
                 variant="text"
                 color="info"
                 size="small"
-                onClick={() => scrollToSection("features")}
+                onClick={() => navigateToSection("/")}
               >
-                Features
+                Home
               </Button>
               <Button
                 variant="text"
                 color="info"
                 size="small"
-                onClick={() => scrollToSection("testimonials")}
+                onClick={() => navigateToSection("/products/")}
               >
-                Testimonials
+                Products
               </Button>
               <Button
                 variant="text"
                 color="info"
                 size="small"
-                onClick={() => scrollToSection("highlights")}
+                onClick={() => navigateToSection("/contact/")}
               >
-                Highlights
+                Contact
               </Button>
               <Button
                 variant="text"
                 color="info"
                 size="small"
-                onClick={() => scrollToSection("pricing")}
+                onClick={() => navigateToSection("/about-us/sustainability/")}
               >
-                Pricing
+                Sunstainability
               </Button>
               <Button
                 variant="text"
                 color="info"
                 size="small"
-                onClick={() => scrollToSection("faq")}
+                onClick={() => navigateToSection("/faq/")}
                 sx={{ minWidth: 0 }}
               >
                 FAQ
@@ -132,7 +128,7 @@ export default function AppAppBar({ mode, toggleColorMode }: AppAppBarProps) {
           </Box>
           <Box sx={{ display: { sm: "flex", md: "none" } }}>
             <IconButton aria-label="Menu button" onClick={toggleDrawer(true)}>
-              <MenuIcon />
+              <MenuIcon fontSize="large" />
             </IconButton>
             <Drawer anchor="top" open={open} onClose={toggleDrawer(false)}>
               <Box sx={{ p: 2, backgroundColor: "background.default" }}>
@@ -148,23 +144,28 @@ export default function AppAppBar({ mode, toggleColorMode }: AppAppBarProps) {
                     toggleColorMode={toggleColorMode}
                   />
                   <IconButton onClick={toggleDrawer(false)}>
-                    <CloseRoundedIcon />
+                    <CloseRoundedIcon fontSize="large" />
                   </IconButton>
                 </Box>
                 <Divider sx={{ my: 3 }} />
-                <MenuItem onClick={() => scrollToSection("features")}>
-                  Features
+                <MenuItem onClick={() => navigateToSection("/")}>Home</MenuItem>
+                <MenuItem onClick={() => navigateToSection("/about-us")}>
+                  About us
                 </MenuItem>
-                <MenuItem onClick={() => scrollToSection("testimonials")}>
-                  Testimonials
+                <MenuItem onClick={() => navigateToSection("/products")}>
+                  Products
                 </MenuItem>
-                <MenuItem onClick={() => scrollToSection("highlights")}>
-                  Highlights
+                <MenuItem onClick={() => navigateToSection("/pricing")}>
+                  Contact
                 </MenuItem>
-                <MenuItem onClick={() => scrollToSection("pricing")}>
-                  Pricing
+                <MenuItem
+                  onClick={() => navigateToSection("/about-us/sunstainability")}
+                >
+                  Sunstainability
                 </MenuItem>
-                <MenuItem onClick={() => scrollToSection("faq")}>FAQ</MenuItem>
+                <MenuItem onClick={() => navigateToSection("/faq")}>
+                  FAQ
+                </MenuItem>
               </Box>
             </Drawer>
           </Box>

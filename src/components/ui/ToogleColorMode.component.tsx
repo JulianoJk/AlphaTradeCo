@@ -20,9 +20,9 @@ export default function ToggleColorMode({
       aria-label="button to toggle theme"
     >
       {mode === "dark" ? (
-        <WbSunnyRoundedIcon fontSize="small" />
+        <WbSunnyRoundedIcon fontSize="medium" />
       ) : (
-        <ModeNightRoundedIcon fontSize="small" />
+        <ModeNightRoundedIcon fontSize="medium" />
       )}
     </MenuButton>
   );
