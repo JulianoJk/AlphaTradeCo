@@ -1,7 +1,12 @@
-import { Box } from "@mui/material";
+import { Paper } from "@mui/material";
 
 const Home = () => {
-  return <Box sx={{ backgroundColor: "#34373f" }}>Welcome!</Box>;
+  return (
+    <Paper sx={{ backgroundColor: "#34373f", marginTop: 20 }}>
+      <h1>asd</h1>
+      <h1>asd</h1>
+    </Paper>
+  );
 };
 
 export default Home;
