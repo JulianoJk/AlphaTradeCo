@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./App.css";
+
 import ResponsiveAppBar from "./components/Header/ResponsiveAppBar.component";
 
 import Home from "./components/Pages/Home.component";
@@ -7,15 +7,11 @@ import Home from "./components/Pages/Home.component";
 function App() {
   return (
     <Router>
-      <div
-        style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
-      >
-        <ResponsiveAppBar />
+      <ResponsiveAppBar />
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
     </Router>
   );
 }

@@ -1,7 +1,6 @@
-import * as React from "react";
+import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
@@ -11,14 +10,13 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Logo from "../../assets/images/logo.png";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 const navItems = ["Home", "About", "Contact"];
 
 export default function DrawerAppBar() {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -41,11 +39,7 @@ export default function DrawerAppBar() {
           width="100px"
           height="100px"
         />
-        <IconButton
-          onClick={handleDrawerToggle}
-          sx={{ fill: "white" }}
-          autoFocus={false}
-        >
+        <IconButton onClick={handleDrawerToggle} autoFocus={false}>
           <CloseIcon fontSize="large" sx={{ color: "white" }} />
         </IconButton>
       </Box>
@@ -64,7 +58,6 @@ export default function DrawerAppBar() {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <CssBaseline />
       <AppBar component="nav">
         <Toolbar sx={{ height: "5em", backgroundColor: "#0d2a49" }}>
           <IconButton
@@ -72,30 +65,28 @@ export default function DrawerAppBar() {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
+            sx={{ mr: -1, display: { sm: "none" } }}
           >
-            <MenuIcon fontSize="large" />
+            <MenuIcon fontSize="large" sx={{ color: "white" }} />
           </IconButton>
-          {/* TODO!: Add the text/logo in the middle of the screen when mobile view */}
-          {mobileOpen === true ? <Typography>Basndiaps</Typography> : <></>}
-
-          <Typography
-            variant="h6"
+          <Box
             component="div"
             sx={{
               flexGrow: 1,
-              display: { xs: "none", sm: "flex", positionLeft: 0 },
+              display: { sm: "flex", positionLeft: 0 },
             }}
           >
-            MUI
-          </Typography>
+            <img
+              src={Logo}
+              alt="Logo-AlphaTrades-co"
+              width="70em"
+              height="70em"
+            />
+          </Box>
+
           <Box sx={{ display: { xs: "none", sm: "flex", positionLeft: 0 } }}>
             {navItems.map((item) => (
-              <Button
-                variant="outlined"
-                key={item}
-                sx={{ color: "#fff", ":focus": "none" }}
-              >
+              <Button key={item} sx={{ color: "#fff", ":focus": "none" }}>
                 {item}
               </Button>
             ))}
