@@ -111,7 +111,12 @@ const Header = ({ mode, toggleColorMode }: AppAppBarProps) => {
   const renderMenuItems = () =>
     menuItems.map((item, index) => (
       <MenuItem key={index} onClick={() => navigateToSection(item.path)}>
-        <Typography>{item.label}</Typography>
+        <Typography
+          color={mode === "dark" ? "#C9C9C9" : "#1c1b1b"}
+          variant="body1"
+        >
+          {item.label}
+        </Typography>
       </MenuItem>
     ));
 
