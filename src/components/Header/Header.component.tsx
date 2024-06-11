@@ -1,6 +1,5 @@
 import { useState } from "react";
 import {
-  PaletteMode,
   useTheme,
   AppBar,
   Box,
@@ -12,16 +11,18 @@ import {
   Toolbar,
   MenuItem,
   Typography,
+  PaletteMode,
 } from "@mui/material";
 import {
   Menu as MenuIcon,
   CloseRounded as CloseRoundedIcon,
 } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import ToggleColorMode from "../ui/ToogleColorMode.component";
 import useScrollDirection from "../../hooks/useScrollDirection";
 import { useStyles } from "./Header.styles";
 import logoOne from "../../assets/logoOne.jpg";
+
 interface AppAppBarProps {
   mode: PaletteMode;
   toggleColorMode: () => void;
@@ -30,6 +31,7 @@ interface AppAppBarProps {
 const Header = ({ mode, toggleColorMode }: AppAppBarProps) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const theme = useTheme();
   const scrollDirection = useScrollDirection();
   const { classes } = useStyles({ mode });
@@ -71,13 +73,13 @@ const Header = ({ mode, toggleColorMode }: AppAppBarProps) => {
     backdropFilter: "blur(24px)",
     maxHeight: 40,
     border: mode === "light" ? "2px solid #201f1f" : "2px solid white",
-
     borderColor: "divider",
     boxShadow:
       mode === "light"
         ? "0 1px 12px hsla(210, 0%, 0%, 0.05), 0 2px 5px hsla(210, 100%, 80%, 0.5)"
         : "none",
   };
+
   const menuItems = [
     { path: "/", label: "Home" },
     { path: "/products/", label: "Products" },
@@ -88,25 +90,36 @@ const Header = ({ mode, toggleColorMode }: AppAppBarProps) => {
   ];
 
   const renderButtons = () =>
-    menuItems.map((item, index) => (
-      <Button
-        key={index}
-        className={`${classes.buttonEffect} fromLeft`}
-        variant="text"
-        size="small"
-        sx={{
-          "&.MuiButton-root:hover": { bgcolor: "transparent" },
-        }}
-        onClick={() => navigateToSection(item.path)}
-      >
-        <Typography
-          color={mode === "dark" ? "#C9C9C9" : "#1c1b1b"}
-          variant="body1"
+    menuItems.map((item, index) => {
+      const isActive = location.pathname === item.path;
+      return (
+        <Button
+          key={index}
+          className={`${classes.buttonEffect} ${
+            isActive ? "active" : "fromLeft"
+          }`}
+          variant="text"
+          size="small"
+          sx={{
+            "&.MuiButton-root:hover": { bgcolor: "transparent" },
+            "&.active": {
+              backgroundPosition: "0",
+              "&:before": {
+                width: "100%",
+              },
+            },
+          }}
+          onClick={() => navigateToSection(item.path)}
         >
-          {item.label}
-        </Typography>
-      </Button>
-    ));
+          <Typography
+            color={mode === "dark" ? "#C9C9C9" : "#1c1b1b"}
+            variant="body1"
+          >
+            {item.label}
+          </Typography>
+        </Button>
+      );
+    });
 
   const renderMenuItems = () =>
     menuItems.map((item, index) => (
