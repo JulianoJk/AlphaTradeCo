@@ -86,14 +86,14 @@ export default function Header({ mode, toggleColorMode }: AppAppBarProps) {
             <XIcon
               fontSize="large"
               sx={{ paddingRight: "1em" }}
-              onClick={() => navigateToSection("/")}
+              onClick={() => navigateToSection("/home")}
             />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               <Button
                 variant="text"
                 color="info"
                 size="small"
-                onClick={() => navigateToSection("/")}
+                onClick={() => navigateToSection("/home/")}
               >
                 Home
               </Button>
@@ -171,7 +171,9 @@ export default function Header({ mode, toggleColorMode }: AppAppBarProps) {
                   </IconButton>
                 </Box>
                 <Divider sx={{ my: 3 }} />
-                <MenuItem onClick={() => navigateToSection("/")}>Home</MenuItem>
+                <MenuItem onClick={() => navigateToSection("/home/")}>
+                  Home
+                </MenuItem>
                 <MenuItem onClick={() => navigateToSection("/about-us")}>
                   About us
                 </MenuItem>

@@ -21,7 +21,7 @@ export default function App() {
       <Router>
         <Header mode={mode} toggleColorMode={toggleColorMode} />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/home/" element={<Home />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/*" element={<Home />} />
         </Routes>
