@@ -1,6 +1,8 @@
+import { useTheme } from "@mui/material/styles";
 import { Paper, Typography } from "@mui/material";
-
+// import ThemeProvider from "@mui/material";
 const AboutUs = () => {
+  const theme = useTheme();
   return (
     <Paper sx={{ backgroundColor: "#34373f", marginTop: 20, padding: 2 }}>
       <Typography variant="h4" sx={{ color: "#ffffff", marginBottom: 2 }}>
@@ -13,7 +15,11 @@ const AboutUs = () => {
         (including Italy, Germany, Belgium, etc.) and beyond (Japan, USA, etc.),
         laying a robust foundation for our strategic development initiatives.
       </Typography>
-      <Typography variant="body1" color="success" sx={{ marginTop: 2 }}>
+      <Typography
+        variant="body1"
+        color={theme.palette.primary.main}
+        sx={{ marginTop: 2 }}
+      >
         Our Group of Companies, comprising:
       </Typography>
       <Typography variant="body1" sx={{ color: "#ffffff" }}>
@@ -55,8 +61,6 @@ const AboutUs = () => {
         assessments, architectural and engineering planning, construction
         supervision, and strategic marketing for managed projects.
       </Typography>
-
-
 
       <Typography variant="h4" sx={{ color: "#ffffff", marginBottom: 2 }}>
         Who We Are

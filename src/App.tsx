@@ -2,15 +2,24 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Pages/Home.component";
 
 import * as React from "react";
-import { PaletteMode } from "@mui/material";
+import { CssBaseline, PaletteMode } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Header from "./components/Header/Header.component";
 import AboutUs from "./components/Pages/AboutUs/AboutUs.component";
 
 export default function App() {
   const [mode, setMode] = React.useState<PaletteMode>("dark");
-
-  const defaultTheme = createTheme({ palette: { mode } });
+  const defaultTheme = createTheme({
+    palette: {
+      background: {
+        default: mode === "dark" ? "#323232" : "#F5F5DC",
+      },
+      text: {
+        primary: mode === "dark" ? "#ffffff" : "#323232",
+      },
+    },
+  });
+  // const defaultTheme = ({ palette: { mode } });
 
   const toggleColorMode = () => {
     setMode((prev) => (prev === "dark" ? "light" : "dark"));
@@ -18,11 +27,12 @@ export default function App() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
+      <CssBaseline />
       <Router>
         <Header mode={mode} toggleColorMode={toggleColorMode} />
         <Routes>
-          <Route path="/home/" element={<Home />} />
-          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/AlphaTradeCo/home/" element={<Home />} />
+          <Route path="/AlphaTradeCo/about-us" element={<AboutUs />} />
           <Route path="/*" element={<Home />} />
         </Routes>
       </Router>

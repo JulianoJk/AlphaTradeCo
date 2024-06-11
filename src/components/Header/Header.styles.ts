@@ -10,7 +10,7 @@ export const useStyles = makeStyles()(() => {
       position: "fixed",
       top: "1em", // Adjust the distance from the top as needed
       left: "50%",
-      transform: "translateX(-50%)",
+      transform: "translateX(-10%)",
       marginBottom: "5em",
     },
     linkItems: {
@@ -25,7 +25,6 @@ export const useStyles = makeStyles()(() => {
       backgroundColor: "#202020",
       border: "1px solid #2d3138",
       borderRadius: "1em", // 16px
-
       height: "4em",
     },
   };
