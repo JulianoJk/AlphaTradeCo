@@ -1,7 +1,7 @@
 import logo from "../../assets/images/logo.png";
 
 import { useState } from "react";
-import { PaletteMode } from "@mui/material";
+import { PaletteMode, useTheme } from "@mui/material";
 import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -25,8 +25,8 @@ interface AppAppBarProps {
 
 export default function Header({ mode, toggleColorMode }: AppAppBarProps) {
   const [open, setOpen] = useState(false);
-
   const navigate = useNavigate();
+  const theme = useTheme();
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
@@ -95,7 +95,7 @@ export default function Header({ mode, toggleColorMode }: AppAppBarProps) {
               width={70}
               height={50}
               style={{ paddingRight: "1em" }}
-              onClick={() => navigateToSection("/AlphaTradeCo/home")}
+              onClick={() => navigateToSection("/home")}
               alt="Logo"
             ></img>
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
@@ -103,7 +103,7 @@ export default function Header({ mode, toggleColorMode }: AppAppBarProps) {
                 variant="text"
                 color="info"
                 size="small"
-                onClick={() => navigateToSection("/AlphaTradeCo/home/")}
+                onClick={() => navigateToSection("/home/")}
               >
                 Home
               </Button>
@@ -111,7 +111,7 @@ export default function Header({ mode, toggleColorMode }: AppAppBarProps) {
                 variant="text"
                 color="info"
                 size="small"
-                onClick={() => navigateToSection("/AlphaTradeCo/products/")}
+                onClick={() => navigateToSection("/products/")}
               >
                 Products
               </Button>
@@ -119,7 +119,7 @@ export default function Header({ mode, toggleColorMode }: AppAppBarProps) {
                 variant="text"
                 color="info"
                 size="small"
-                onClick={() => navigateToSection("/AlphaTradeCo/contact/")}
+                onClick={() => navigateToSection("/contact/")}
               >
                 Contact
               </Button>
@@ -127,7 +127,7 @@ export default function Header({ mode, toggleColorMode }: AppAppBarProps) {
                 variant="text"
                 color="info"
                 size="small"
-                onClick={() => navigateToSection("/AlphaTradeCo/about-us/")}
+                onClick={() => navigateToSection("/about-us/")}
               >
                 About us
               </Button>
@@ -135,9 +135,7 @@ export default function Header({ mode, toggleColorMode }: AppAppBarProps) {
                 variant="text"
                 color="info"
                 size="small"
-                onClick={() =>
-                  navigateToSection("/AlphaTradeCo/about-us/sustainability/")
-                }
+                onClick={() => navigateToSection("/about-us/sustainability/")}
               >
                 Sustainability
               </Button>
@@ -145,7 +143,7 @@ export default function Header({ mode, toggleColorMode }: AppAppBarProps) {
                 variant="text"
                 color="info"
                 size="small"
-                onClick={() => navigateToSection("/AlphaTradeCo/faq/")}
+                onClick={() => navigateToSection("/faq/")}
                 sx={{ minWidth: 0 }}
               >
                 FAQ
@@ -179,40 +177,36 @@ export default function Header({ mode, toggleColorMode }: AppAppBarProps) {
                     toggleColorMode={toggleColorMode}
                   />
                   <IconButton onClick={toggleDrawer(false)}>
-                    <CloseRoundedIcon fontSize="large" />
+                    <CloseRoundedIcon
+                      fontSize="large"
+                      sx={{
+                        color:
+                          mode === "dark"
+                            ? theme.palette.common.white
+                            : theme.palette.common.black,
+                      }}
+                    />
                   </IconButton>
                 </Box>
                 <Divider sx={{ my: 3 }} />
-                <MenuItem
-                  onClick={() => navigateToSection("/AlphaTradeCo/home/")}
-                >
+                <MenuItem onClick={() => navigateToSection("/home/")}>
                   Home
                 </MenuItem>
-                <MenuItem
-                  onClick={() => navigateToSection("/AlphaTradeCo/about-us")}
-                >
+                <MenuItem onClick={() => navigateToSection("/about-us")}>
                   About us
                 </MenuItem>
-                <MenuItem
-                  onClick={() => navigateToSection("/AlphaTradeCo/products")}
-                >
+                <MenuItem onClick={() => navigateToSection("/products")}>
                   Products
                 </MenuItem>
-                <MenuItem
-                  onClick={() => navigateToSection("/AlphaTradeCo/pricing")}
-                >
+                <MenuItem onClick={() => navigateToSection("/pricing")}>
                   Contact
                 </MenuItem>
                 <MenuItem
-                  onClick={() =>
-                    navigateToSection("/AlphaTradeCo/about-us/sustainability")
-                  }
+                  onClick={() => navigateToSection("/about-us/sustainability")}
                 >
                   Sustainability
                 </MenuItem>
-                <MenuItem
-                  onClick={() => navigateToSection("/AlphaTradeCo/faq")}
-                >
+                <MenuItem onClick={() => navigateToSection("/faq")}>
                   FAQ
                 </MenuItem>
               </Box>

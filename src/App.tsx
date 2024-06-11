@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Pages/Home.component";
 
 import * as React from "react";
@@ -11,6 +11,9 @@ export default function App() {
   const [mode, setMode] = React.useState<PaletteMode>("dark");
   const defaultTheme = createTheme({
     palette: {
+      common: {
+        black: "#31312d",
+      },
       background: {
         default: mode === "dark" ? "#323232" : "#F5F5DC",
       },
@@ -31,9 +34,9 @@ export default function App() {
       <Router>
         <Header mode={mode} toggleColorMode={toggleColorMode} />
         <Routes>
-          <Route path="/AlphaTradeCo/home/" element={<Home />} />
-          <Route path="/AlphaTradeCo/about-us" element={<AboutUs />} />
-          <Route path="/*" element={<Home />} />
+          <Route path="/home/" element={<Home />} />
+          <Route path="/about-us/" element={<AboutUs />} />
+          <Route path="/*/" element={<Home />} />
         </Routes>
       </Router>
     </ThemeProvider>
