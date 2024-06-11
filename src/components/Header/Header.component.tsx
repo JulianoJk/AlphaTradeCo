@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   PaletteMode,
   useTheme,
@@ -21,7 +21,7 @@ import { useNavigate } from "react-router-dom";
 import ToggleColorMode from "../ui/ToogleColorMode.component";
 import useScrollDirection from "../../hooks/useScrollDirection";
 import { useStyles } from "./Header.styles";
-import logo from "../../assets/images/logo.png";
+import logoOne from "../../assets/images/logoOne.jpg";
 interface AppAppBarProps {
   mode: PaletteMode;
   toggleColorMode: () => void;
@@ -124,7 +124,7 @@ const Header = ({ mode, toggleColorMode }: AppAppBarProps) => {
             sx={{ flexGrow: 1, display: "flex", alignItems: "center", px: 0 }}
           >
             <img
-              src={logo}
+              src={logoOne}
               width={70}
               height={50}
               style={{ paddingRight: "1em" }}

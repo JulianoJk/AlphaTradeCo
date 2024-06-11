@@ -22,7 +22,6 @@ export default function App() {
       },
     },
   });
-  // const defaultTheme = ({ palette: { mode } });
 
   const toggleColorMode = () => {
     setMode((prev) => (prev === "dark" ? "light" : "dark"));
