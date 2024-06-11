@@ -15,7 +15,7 @@ export default function App() {
         black: "#31312d",
       },
       background: {
-        default: mode === "dark" ? "#323232" : "#F5F5DC",
+        default: mode === "dark" ? "#242424" : "#F5F5DC",
       },
       text: {
         primary: mode === "dark" ? "#ffffff" : "#323232",

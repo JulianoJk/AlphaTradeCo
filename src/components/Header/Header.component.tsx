@@ -1,92 +1,125 @@
-import logo from "../../assets/images/logo.png";
-
-import { useState } from "react";
-import { PaletteMode, useTheme } from "@mui/material";
-import Box from "@mui/material/Box";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import Container from "@mui/material/Container";
-import Divider from "@mui/material/Divider";
-import MenuItem from "@mui/material/MenuItem";
-import Drawer from "@mui/material/Drawer";
-import MenuIcon from "@mui/icons-material/Menu";
-import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import ToggleColorMode from "../ui/ToogleColorMode.component";
-
+import React, { useState } from "react";
+import {
+  PaletteMode,
+  useTheme,
+  AppBar,
+  Box,
+  Button,
+  Container,
+  Divider,
+  Drawer,
+  IconButton,
+  Toolbar,
+  MenuItem,
+  Typography,
+} from "@mui/material";
+import {
+  Menu as MenuIcon,
+  CloseRounded as CloseRoundedIcon,
+} from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import ToggleColorMode from "../ui/ToogleColorMode.component";
 import useScrollDirection from "../../hooks/useScrollDirection";
-
+import { useStyles } from "./Header.styles";
+import logo from "../../assets/images/logo.png";
 interface AppAppBarProps {
   mode: PaletteMode;
   toggleColorMode: () => void;
 }
 
-export default function Header({ mode, toggleColorMode }: AppAppBarProps) {
+const Header = ({ mode, toggleColorMode }: AppAppBarProps) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const theme = useTheme();
+  const scrollDirection = useScrollDirection();
+  const { classes } = useStyles();
 
-  const toggleDrawer = (newOpen: boolean) => () => {
-    setOpen(newOpen);
-  };
-
+  const toggleDrawer = (newOpen: boolean) => () => setOpen(newOpen);
   const navigateToSection = (sectionId: string) => {
     navigate(sectionId);
     setOpen(false);
   };
 
-  const scrollDirection = useScrollDirection();
+  const appBarStyles = {
+    boxShadow: 0,
+    bgcolor: "transparent",
+    backgroundImage: "none",
+    mt: 2,
+    maxWidth: { xs: "100%", md: "50em" },
+    left: 0,
+    right: 0,
+    marginLeft: "auto",
+    marginRight: "auto",
+    paddingTop: {
+      xs: scrollDirection === "down" ? -11 : -6,
+      md: "1px",
+    },
+    transform: {
+      xs: scrollDirection === "down" ? "translateY(-100%)" : "translateY(0)",
+      md: "translateY(0)",
+    },
+    transition: "transform 0.2s ease-in-out",
+  };
+
+  const toolbarStyles = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexShrink: 0,
+    borderRadius: "1.5em",
+    backgroundColor: mode === "light" ? "hsla(220, 60%, 99%, 0.6)" : "#1c1b1b",
+    backdropFilter: "blur(24px)",
+    maxHeight: 40,
+    border: mode === "light" ? "2px solid #201f1f" : "2px solid white",
+
+    borderColor: "divider",
+    boxShadow:
+      mode === "light"
+        ? "0 1px 12px hsla(210, 0%, 0%, 0.05), 0 2px 5px hsla(210, 100%, 80%, 0.5)"
+        : "none",
+  };
+  const menuItems = [
+    { path: "/home/", label: "Home" },
+    { path: "/products/", label: "Products" },
+    { path: "/contact/", label: "Contact" },
+    { path: "/about-us/", label: "About us" },
+    { path: "/about-us/sustainability/", label: "Sustainability" },
+    { path: "/faq/", label: "FAQ" },
+  ];
+
+  const renderButtons = () =>
+    menuItems.map((item, index) => (
+      <Button
+        key={index}
+        className={`${classes.buttonEffect} fromLeft`}
+        variant="text"
+        color="info"
+        size="small"
+        sx={{
+          "&.MuiButton-root:hover": { bgcolor: "transparent",  },
+        }}
+        onClick={() => navigateToSection(item.path)}
+      >
+        <Typography
+          color={mode === "dark" ? "#C9C9C9" : "#1c1b1b"}
+          variant="body1"
+        >
+          {item.label}
+        </Typography>
+      </Button>
+    ));
+
+  const renderMenuItems = () =>
+    menuItems.map((item, index) => (
+      <MenuItem key={index} onClick={() => navigateToSection(item.path)}>
+        <Typography>{item.label}</Typography>
+      </MenuItem>
+    ));
 
   return (
-    <AppBar
-      position="fixed"
-      sx={(theme) => ({
-        boxShadow: 0,
-        bgcolor: "transparent",
-        backgroundImage: "none",
-        mt: 2,
-        maxWidth: { xs: "100%", md: "50em" }, // Set max width for larger screens
-        left: 0, // Center the AppBar
-        right: 0, // Center the AppBar
-        marginLeft: "auto", // Center the AppBar
-        marginRight: "auto", // Center the AppBar
-        paddingTop: {
-          xs: scrollDirection === "down" ? -11 : -6, // Set paddingTop to 0 if scrolling down on mobile
-          md: theme.spacing(2), // Use default padding for larger screens
-        },
-        transform: {
-          xs:
-            scrollDirection === "down" ? "translateY(-100%)" : "translateY(0)",
-          md: "translateY(0)", // No transformation for larger screens
-        },
-        transition: "transform 0.2s ease-in-out", // Add transition for smooth hiding/showing
-      })}
-    >
+    <AppBar position="fixed" sx={appBarStyles}>
       <Container maxWidth="lg">
-        <Toolbar
-          variant="regular"
-          sx={(theme) => ({
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            flexShrink: 0,
-            borderRadius: "999px",
-            bgcolor:
-              theme.palette.mode === "light"
-                ? "hsla(220, 60%, 99%, 0.6)"
-                : "hsla(220, 0%, 0%, 0.7)",
-            backdropFilter: "blur(24px)",
-            maxHeight: 40,
-            border: "1px solid",
-            borderColor: "divider",
-            boxShadow:
-              theme.palette.mode === "light"
-                ? "0 1px 2px hsla(210, 0%, 0%, 0.05), 0 2px 12px hsla(210, 100%, 80%, 0.5)"
-                : "0 1px 2px hsla(210, 0%, 0%, 0.5), 0 2px 12px hsla(210, 100%, 25%, 0.3)",
-          })}
-        >
+        <Toolbar variant="regular" sx={toolbarStyles}>
           <Box
             sx={{ flexGrow: 1, display: "flex", alignItems: "center", px: 0 }}
           >
@@ -97,57 +130,9 @@ export default function Header({ mode, toggleColorMode }: AppAppBarProps) {
               style={{ paddingRight: "1em" }}
               onClick={() => navigateToSection("/home")}
               alt="Logo"
-            ></img>
+            />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <Button
-                variant="text"
-                color="info"
-                size="small"
-                onClick={() => navigateToSection("/home/")}
-              >
-                Home
-              </Button>
-              <Button
-                variant="text"
-                color="info"
-                size="small"
-                onClick={() => navigateToSection("/products/")}
-              >
-                Products
-              </Button>
-              <Button
-                variant="text"
-                color="info"
-                size="small"
-                onClick={() => navigateToSection("/contact/")}
-              >
-                Contact
-              </Button>
-              <Button
-                variant="text"
-                color="info"
-                size="small"
-                onClick={() => navigateToSection("/about-us/")}
-              >
-                About us
-              </Button>
-              <Button
-                variant="text"
-                color="info"
-                size="small"
-                onClick={() => navigateToSection("/about-us/sustainability/")}
-              >
-                Sustainability
-              </Button>
-              <Button
-                variant="text"
-                color="info"
-                size="small"
-                onClick={() => navigateToSection("/faq/")}
-                sx={{ minWidth: 0 }}
-              >
-                FAQ
-              </Button>
+              {renderButtons()}
             </Box>
           </Box>
           <Box
@@ -161,7 +146,15 @@ export default function Header({ mode, toggleColorMode }: AppAppBarProps) {
           </Box>
           <Box sx={{ display: { sm: "flex", md: "none" } }}>
             <IconButton aria-label="Menu button" onClick={toggleDrawer(true)}>
-              <MenuIcon fontSize="large" />
+              <MenuIcon
+                fontSize="large"
+                sx={{
+                  color:
+                    mode === "dark"
+                      ? theme.palette.common.white
+                      : theme.palette.common.black,
+                }}
+              />
             </IconButton>
             <Drawer anchor="top" open={open} onClose={toggleDrawer(false)}>
               <Box sx={{ p: 2, backgroundColor: "background.default" }}>
@@ -189,26 +182,7 @@ export default function Header({ mode, toggleColorMode }: AppAppBarProps) {
                   </IconButton>
                 </Box>
                 <Divider sx={{ my: 3 }} />
-                <MenuItem onClick={() => navigateToSection("/home/")}>
-                  Home
-                </MenuItem>
-                <MenuItem onClick={() => navigateToSection("/about-us")}>
-                  About us
-                </MenuItem>
-                <MenuItem onClick={() => navigateToSection("/products")}>
-                  Products
-                </MenuItem>
-                <MenuItem onClick={() => navigateToSection("/pricing")}>
-                  Contact
-                </MenuItem>
-                <MenuItem
-                  onClick={() => navigateToSection("/about-us/sustainability")}
-                >
-                  Sustainability
-                </MenuItem>
-                <MenuItem onClick={() => navigateToSection("/faq")}>
-                  FAQ
-                </MenuItem>
+                {renderMenuItems()}
               </Box>
             </Drawer>
           </Box>
@@ -216,4 +190,6 @@ export default function Header({ mode, toggleColorMode }: AppAppBarProps) {
       </Container>
     </AppBar>
   );
-}
+};
+
+export default Header;
