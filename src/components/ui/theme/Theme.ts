@@ -150,9 +150,5 @@ export const theme: Theme = createTheme({
       medium: Palette.Yellow.Medium,
       light: Palette.Yellow.light,
     },
-    action: {
-      disabledBackground: Palette.Mono.Grey3,
-      disabled: Palette.Mono.White,
-    },
   },
 } as ThemeOptions);

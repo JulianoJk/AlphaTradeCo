@@ -11,7 +11,6 @@ import {
   Toolbar,
   MenuItem,
   Typography,
-  PaletteMode,
 } from "@mui/material";
 import {
   Menu as MenuIcon,
@@ -22,18 +21,19 @@ import ToggleColorMode from "../ui/ToogleColorMode.component";
 import useScrollDirection from "../../hooks/useScrollDirection";
 import { useStyles } from "./Header.styles";
 import logoOne from "../../assets/logoOne.jpg";
+import { useAppState } from "../context/AppContext";
 
 interface AppAppBarProps {
-  mode: PaletteMode;
   toggleColorMode: () => void;
 }
 
-const Header = ({ mode, toggleColorMode }: AppAppBarProps) => {
+const Header = ({ toggleColorMode }: AppAppBarProps) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
   const scrollDirection = useScrollDirection();
+  const { mode } = useAppState();
   const { classes } = useStyles({ mode });
 
   const toggleDrawer = (newOpen: boolean) => () => setOpen(newOpen);
@@ -74,10 +74,6 @@ const Header = ({ mode, toggleColorMode }: AppAppBarProps) => {
     maxHeight: 40,
     border: mode === "light" ? "2px solid #201f1f" : "2px solid white",
     borderColor: "divider",
-    boxShadow:
-      mode === "light"
-        ? "0 1px 12px hsla(210, 0%, 0%, 0.05), 0 2px 5px hsla(210, 100%, 80%, 0.5)"
-        : "none",
   };
 
   const menuItems = [

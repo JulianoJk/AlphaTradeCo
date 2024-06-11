@@ -1,10 +1,20 @@
 import { useTheme } from "@mui/material/styles";
 import { Paper, Typography } from "@mui/material";
+
+import useModeTheme from "../../../hooks/useModeTheme";
 // import ThemeProvider from "@mui/material";
 const AboutUs = () => {
   const theme = useTheme();
+  const backgroundColorss = useModeTheme("red", theme.palette.grey[100]); // Use
   return (
-    <Paper sx={{ backgroundColor: "#34373f", marginTop: 20, padding: 2 }}>
+    <Paper
+      sx={{
+        backgroundColor: backgroundColorss,
+
+        marginTop: 20,
+        padding: 2,
+      }}
+    >
       <Typography variant="h4" sx={{ color: "#ffffff", marginBottom: 2 }}>
         Who We Are
       </Typography>
