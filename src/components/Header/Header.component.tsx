@@ -21,7 +21,7 @@ import { useNavigate } from "react-router-dom";
 import ToggleColorMode from "../ui/ToogleColorMode.component";
 import useScrollDirection from "../../hooks/useScrollDirection";
 import { useStyles } from "./Header.styles";
-import logoOne from "../../assets/images/logoOne.jpg";
+import logoOne from "../../assets/logoOne.jpg";
 interface AppAppBarProps {
   mode: PaletteMode;
   toggleColorMode: () => void;
@@ -79,7 +79,7 @@ const Header = ({ mode, toggleColorMode }: AppAppBarProps) => {
         : "none",
   };
   const menuItems = [
-    { path: "/home/", label: "Home" },
+    { path: "/", label: "Home" },
     { path: "/products/", label: "Products" },
     { path: "/contact/", label: "Contact" },
     { path: "/about-us/", label: "About us" },
@@ -93,7 +93,6 @@ const Header = ({ mode, toggleColorMode }: AppAppBarProps) => {
         key={index}
         className={`${classes.buttonEffect} fromLeft`}
         variant="text"
-        color="info"
         size="small"
         sx={{
           "&.MuiButton-root:hover": { bgcolor: "transparent" },
@@ -128,7 +127,7 @@ const Header = ({ mode, toggleColorMode }: AppAppBarProps) => {
               width={70}
               height={50}
               style={{ paddingRight: "1em" }}
-              onClick={() => navigateToSection("/home")}
+              onClick={() => navigateToSection("/")}
               alt="Logo"
             />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>

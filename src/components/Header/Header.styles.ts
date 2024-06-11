@@ -34,7 +34,11 @@ export const useStyles = makeStyles<{ mode: string }>()(
       textTransform: "uppercase",
       margin: 0,
       padding: "5px 10px", // Adjust padding for spacing
-      backgroundImage: `linear-gradient(to right, #54b3d6, #54b3d6 50%, ${
+      backgroundImage: `linear-gradient(to right, ${
+        mode === "dark"
+          ? theme.palette.primary.light
+          : theme.palette.primary.dark
+      } 50%, ${
         mode === "dark"
           ? theme.palette.common.white
           : theme.palette.common.black
@@ -46,7 +50,7 @@ export const useStyles = makeStyles<{ mode: string }>()(
       transition: "all 0.3s ease-in-out",
       "&:before": {
         content: '""',
-        background: "#54b3d6",
+        background: `${mode === "dark" ? "#EFE2BA" : "#9d6d10"}`,
         display: "block",
         position: "absolute",
         bottom: "-3px",

@@ -1,6 +1,6 @@
 import { PaletteMode } from "@mui/material";
 import WbSunnyRoundedIcon from "@mui/icons-material/WbSunnyRounded";
-import ModeNightRoundedIcon from "@mui/icons-material/ModeNightRounded";
+import ModeNightOutlinedIcon from "@mui/icons-material/ModeNightOutlined";
 import MenuButton from "./MenuButton.component";
 
 interface ToggleColorModeProps {
@@ -19,9 +19,9 @@ export default function ToggleColorMode({
       aria-label="button to toggle theme"
     >
       {mode === "dark" ? (
-        <WbSunnyRoundedIcon fontSize="medium" sx={{ color: "yellow" }} />
+        <WbSunnyRoundedIcon fontSize="medium" sx={{ color: "#FFD700" }} />
       ) : (
-        <ModeNightRoundedIcon fontSize="medium" sx={{ color: "#BDBDBD" }} />
+        <ModeNightOutlinedIcon fontSize="medium" sx={{ color: "#151515" }} />
       )}
     </MenuButton>
   );
