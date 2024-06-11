@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { PaletteMode } from "@mui/material";
 import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
@@ -12,8 +13,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import ToggleColorMode from "../ui/ToogleColorMode.component";
 import XIcon from "@mui/icons-material/X";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useScrollDirection from "../../hooks/useScrollDirection";
 
 interface AppAppBarProps {
   mode: PaletteMode;
@@ -22,7 +23,9 @@ interface AppAppBarProps {
 
 export default function Header({ mode, toggleColorMode }: AppAppBarProps) {
   const [open, setOpen] = useState(false);
+
   const navigate = useNavigate();
+
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
   };
@@ -32,15 +35,27 @@ export default function Header({ mode, toggleColorMode }: AppAppBarProps) {
     setOpen(false);
   };
 
+  const scrollDirection = useScrollDirection();
+
   return (
     <AppBar
       position="fixed"
-      sx={{
+      sx={(theme) => ({
         boxShadow: 0,
         bgcolor: "transparent",
         backgroundImage: "none",
         mt: 2,
-      }}
+        paddingTop: {
+          xs: scrollDirection === "down" ? -11 : -6, // Set paddingTop to 0 if scrolling down on mobile
+          md: theme.spacing(2), // Use default padding for larger screens
+        },
+        transform: {
+          xs:
+            scrollDirection === "down" ? "translateY(-100%)" : "translateY(0)",
+          md: "translateY(0)", // No transformation for larger screens
+        },
+        transition: "transform 0.2s ease-in-out", // Add transition for smooth hiding/showing
+      })}
     >
       <Container maxWidth="lg">
         <Toolbar
@@ -97,6 +112,14 @@ export default function Header({ mode, toggleColorMode }: AppAppBarProps) {
                 onClick={() => navigateToSection("/contact/")}
               >
                 Contact
+              </Button>
+              <Button
+                variant="text"
+                color="info"
+                size="small"
+                onClick={() => navigateToSection("/about-us/")}
+              >
+                About us
               </Button>
               <Button
                 variant="text"
