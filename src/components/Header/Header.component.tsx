@@ -32,7 +32,7 @@ const Header = ({ mode, toggleColorMode }: AppAppBarProps) => {
   const navigate = useNavigate();
   const theme = useTheme();
   const scrollDirection = useScrollDirection();
-  const { classes } = useStyles();
+  const { classes } = useStyles({ mode });
 
   const toggleDrawer = (newOpen: boolean) => () => setOpen(newOpen);
   const navigateToSection = (sectionId: string) => {
@@ -96,7 +96,7 @@ const Header = ({ mode, toggleColorMode }: AppAppBarProps) => {
         color="info"
         size="small"
         sx={{
-          "&.MuiButton-root:hover": { bgcolor: "transparent",  },
+          "&.MuiButton-root:hover": { bgcolor: "transparent" },
         }}
         onClick={() => navigateToSection(item.path)}
       >
