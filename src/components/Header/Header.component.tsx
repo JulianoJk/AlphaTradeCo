@@ -22,6 +22,7 @@ import useScrollDirection from "../../hooks/useScrollDirection";
 import { useStyles } from "./Header.styles";
 import logoOne from "../../assets/logoOne.jpg";
 import { useAppState } from "../context/AppContext";
+import EnglishIllustration from "../ui/images/EnglishIllustration";
 
 interface AppAppBarProps {
   toggleColorMode: () => void;
@@ -119,7 +120,11 @@ const Header = ({ toggleColorMode }: AppAppBarProps) => {
 
   const renderMenuItems = () =>
     menuItems.map((item, index) => (
-      <MenuItem key={index} onClick={() => navigateToSection(item.path)}>
+      <MenuItem
+        key={index}
+        onClick={() => navigateToSection(item.path)}
+        sx={{ paddingTop: "2.2em" }}
+      >
         <Typography
           color={mode === "dark" ? "#C9C9C9" : "#1c1b1b"}
           variant="body1"
@@ -168,9 +173,28 @@ const Header = ({ toggleColorMode }: AppAppBarProps) => {
                       : theme.palette.common.black,
                 }}
               />
+              <EnglishIllustration fontSize="large" />
             </IconButton>
-            <Drawer anchor="top" open={open} onClose={toggleDrawer(false)}>
-              <Box sx={{ p: 2, backgroundColor: "background.default" }}>
+            <Drawer
+              anchor="top"
+              open={open}
+              onClose={toggleDrawer(false)}
+              PaperProps={{
+                sx: {
+                  height: "100vh",
+                  backgroundColor: "background.default",
+                },
+              }}
+            >
+              <Box
+                sx={{
+                  paddinTop: "3em",
+                  p: 2,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                }}
+              >
                 <Box
                   sx={{
                     display: "flex",
