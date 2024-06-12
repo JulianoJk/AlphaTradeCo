@@ -48,7 +48,7 @@ const Header = ({ toggleColorMode }: AppAppBarProps) => {
     bgcolor: "transparent",
     backgroundImage: "none",
     mt: 2,
-    maxWidth: { xs: "100%", md: "50em" },
+    maxWidth: { xs: "100%", md: "55em" },
     left: 0,
     right: 0,
     marginLeft: "auto",
@@ -161,6 +161,7 @@ const Header = ({ toggleColorMode }: AppAppBarProps) => {
             }}
           >
             <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
+            <EnglishIllustration style={{ marginLeft: "8px" }} />
           </Box>
           <Box sx={{ display: { sm: "flex", md: "none" } }}>
             <IconButton aria-label="Menu button" onClick={toggleDrawer(true)}>
@@ -173,7 +174,6 @@ const Header = ({ toggleColorMode }: AppAppBarProps) => {
                       : theme.palette.common.black,
                 }}
               />
-              <EnglishIllustration fontSize="large" />
             </IconButton>
             <Drawer
               anchor="top"
@@ -188,11 +188,11 @@ const Header = ({ toggleColorMode }: AppAppBarProps) => {
             >
               <Box
                 sx={{
-                  paddinTop: "3em",
-                  p: 2,
+                  height: "100%",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
+                  p: 2,
                 }}
               >
                 <Box
@@ -220,6 +220,16 @@ const Header = ({ toggleColorMode }: AppAppBarProps) => {
                 </Box>
                 <Divider sx={{ my: 3 }} />
                 {renderMenuItems()}
+                <Box
+                  sx={{
+                    mt: "auto",
+                    display: "flex",
+                    alignItems: "center",
+                    p: 2,
+                  }}
+                >
+                  <EnglishIllustration />
+                </Box>
               </Box>
             </Drawer>
           </Box>
