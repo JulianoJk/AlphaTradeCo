@@ -22,7 +22,8 @@ import useScrollDirection from "../../hooks/useScrollDirection";
 import { useStyles } from "./Header.styles";
 import logoOne from "../../assets/logoOne.jpg";
 import { useAppState } from "../context/AppContext";
-import EnglishIllustration from "../ui/images/EnglishIllustration";
+
+import LanguagesMenu from "./LanguagesMenu.component";
 
 interface AppAppBarProps {
   toggleColorMode: () => void;
@@ -161,7 +162,7 @@ const Header = ({ toggleColorMode }: AppAppBarProps) => {
             }}
           >
             <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
-            <EnglishIllustration style={{ marginLeft: "8px" }} />
+            <LanguagesMenu />
           </Box>
           <Box sx={{ display: { sm: "flex", md: "none" } }}>
             <IconButton aria-label="Menu button" onClick={toggleDrawer(true)}>
@@ -228,7 +229,8 @@ const Header = ({ toggleColorMode }: AppAppBarProps) => {
                     p: 2,
                   }}
                 >
-                  <EnglishIllustration />
+                  {/* TODO!: In here, make it so the languages open in a row instead of a selector. make a button which like in menu, will open in row and show/hide the image languages and below that will have the name of the icon. <UK> bellow English, <Germany> German */}
+                  <LanguagesMenu />
                 </Box>
               </Box>
             </Drawer>
