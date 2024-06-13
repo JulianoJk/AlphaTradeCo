@@ -27,7 +27,12 @@ const initialActions: Action[] = [
 ];
 
 const PlaygroundSpeedDial: React.FC = () => {
-  const [mainIcon, setMainIcon] = useState(<EnglishIllustration />);
+  const initialMainIcon: Action = {
+    icon: <EnglishIllustration />,
+    name: "English",
+  };
+
+  const [mainIcon, setMainIcon] = useState(initialMainIcon);
   const [actions, setActions] = useState<Action[]>(initialActions);
   const [open, setOpen] = useState(false);
   const theme = useTheme();
@@ -36,19 +41,13 @@ const PlaygroundSpeedDial: React.FC = () => {
     const newActions = [...actions];
     const clickedAction = newActions[actionIndex];
 
-    // Swap the icons and update the name
     newActions[actionIndex] = {
-      icon: mainIcon,
-      name: clickedAction.name,
+      icon: mainIcon.icon,
+      name: mainIcon.name,
     };
 
-    // Update the main icon to the clicked action's icon
-    setMainIcon(clickedAction.icon);
-
-    // Update the state with the new actions array
+    setMainIcon(clickedAction);
     setActions(newActions);
-
-    // Close the SpeedDial after an action is clicked
     setOpen(false);
   };
 
@@ -86,16 +85,16 @@ const PlaygroundSpeedDial: React.FC = () => {
                 alignItems: "center",
               }}
             >
-              {mainIcon}
+              {mainIcon.icon}
               <Typography
                 sx={{ mt: 1, color: theme.palette.common.white }}
                 variant="body2"
               >
-                English
+                {mainIcon.name}
               </Typography>
             </Box>
           }
-          sx={{  height: "5em" }}
+          sx={{ height: "5em" }}
           FabProps={{
             variant: "circular",
             sx: {
@@ -123,7 +122,6 @@ const PlaygroundSpeedDial: React.FC = () => {
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    // marginTop: "1.69em",
                   }}
                 >
                   {action.icon}
