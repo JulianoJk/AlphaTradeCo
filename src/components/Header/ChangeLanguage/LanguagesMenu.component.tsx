@@ -1,95 +1,119 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import IconButton from "@mui/material/IconButton";
+import React, { useState, JSX } from "react";
+import Tooltip from "@mui/material/Tooltip";
+import {
+  Box,
+  IconButton,
+  List,
+  ListItem,
+  MenuItem,
+  Typography,
+} from "@mui/material";
 import EnglishIllustration from "../../ui/images/EnglishIllustration";
+import ItalyIllustration from "../../ui/images/ItalyIllustration";
+import GermanyIllustration from "../../ui/images/GermanyIllustration";
+import GreeceIllustration from "../../ui/images/GreeceIllustration";
+import { useAppState } from "../../context/AppContext";
 
-interface LanguagesMenuProps {
-  isMobile?: boolean;
+interface Action {
+  icon: JSX.Element;
+  name: string;
 }
 
-const LanguagesMenu = ({ isMobile = false }: LanguagesMenuProps) => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const options: string[] = ["English", "German", "Italian", "Greek"];
+const initialActions: Action[] = [
+  { icon: <ItalyIllustration height="1em" />, name: "IT" },
+  { icon: <GermanyIllustration height="1em" />, name: "DE" },
+  { icon: <GreeceIllustration height="1em" />, name: "GR" },
+];
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+const LanguagesMenu: React.FC = () => {
+  const [open, setOpen] = useState(false);
+  const { mode } = useAppState();
+  const [mainIcon, setMainIcon] = useState<Action>({
+    icon: <EnglishIllustration height="1em" />,
+    name: "EN",
+  });
+  const [actions, setActions] = useState<Action[]>(initialActions);
 
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleClick = (actionIndex: number) => {
+    const newActions = [...actions];
+    const clickedAction = newActions[actionIndex];
+
+    newActions[actionIndex] = {
+      icon: mainIcon.icon,
+      name: mainIcon.name,
+    };
+
+    setMainIcon(clickedAction);
+    setActions(newActions);
+    setOpen(false);
   };
 
   return (
     <>
-      <Box
+      <Tooltip
+        open={open}
         sx={{
-          display: "flex",
-          alignItems: "center",
-          textAlign: "center",
-          position: isMobile ? "fixed" : "static",
-          bottom: isMobile ? 0 : "auto",
-          zIndex: 1301, // Ensure it's above the mobile drawer (1300)
+          "&.MuiTooltip-tooltipArrow": { backgroundColor: "transparent" },
         }}
+        arrow
+        title={
+          <Box
+            sx={{
+              backgroundColor: "transparent",
+              width: "100%",
+              borderRadius: "6px",
+              border: "2px solid #6f6855",
+              marginTop: "-4px",
+            }}
+          >
+            <List>
+              {actions.map((action, index) => (
+                <MenuItem
+                  sx={{
+                    borderRadius: "10em",
+                    "&.MuiMenuItem-root:hover": {
+                      borderRadius: "0.2em",
+                      backgroundColor: mode === "light" ? "#a1a1a0" : "#444444",
+                      //   #
+                    },
+                  }}
+                  key={action.name}
+                  onClick={() => handleClick(index)}
+                >
+                  <ListItem
+                    disablePadding
+                    sx={{ display: "flex", alignItems: "center" }}
+                  >
+                    {action.icon}
+                    <Typography
+                      sx={{
+                        fontSize: "1em",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {action.name}
+                    </Typography>
+                  </ListItem>
+                </MenuItem>
+              ))}
+            </List>
+          </Box>
+        }
       >
         <IconButton
-          onClick={handleClick}
-          size="small"
-          sx={{ ml: 2 }}
-          aria-controls={open ? "account-menu" : undefined}
+          onClick={() => setOpen(!open)}
+          aria-controls={open ? "language-menu" : undefined}
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
+          disableRipple
+          disableTouchRipple
+          sx={{ ml: -2 }}
         >
-          <EnglishIllustration style={{ width: 32, height: 32 }} />
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            {mainIcon.icon}
+          </Box>
         </IconButton>
-      </Box>
-      <Menu
-        anchorEl={anchorEl}
-        id="account-menu"
-        open={open}
-        onClose={handleClose}
-        onClick={handleClose}
-        MenuListProps={{
-          sx: {
-            overflow: "visible",
-            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-            mt: 1.5,
-            "& .MuiAvatar-root": {
-              width: 32,
-              height: 32,
-              ml: -0.5,
-              mr: 1,
-            },
-            "&::before": {
-              content: '""',
-              display: "block",
-              position: "absolute",
-              top: 0,
-              right: 14,
-              width: 10,
-              height: 10,
-              bgcolor: "background.paper",
-              transform: "translateY(-50%) rotate(45deg)",
-              zIndex: 0,
-            },
-          },
-        }}
-        transformOrigin={{ horizontal: "right", vertical: "top" }}
-        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-      >
-        {options.map((option) => (
-          <MenuItem
-            sx={{ top: 8 }}
-            key={option}
-            selected={option === "Pyxis"}
-            onClick={handleClose}
-          >
-            {option}
-          </MenuItem>
-        ))}
-      </Menu>
+      </Tooltip>
     </>
   );
 };

@@ -23,9 +23,10 @@ export default function AppInner() {
       MuiList: {
         styleOverrides: {
           root: {
-            backgroundColor: "#242424",
+            backgroundColor: mode === "light" ? "#c3c3bb87" : "#242424",
             fontSize: "1px",
             fontWeight: "bold",
+            borderRadius: "4px",
           },
         },
         defaultProps: {

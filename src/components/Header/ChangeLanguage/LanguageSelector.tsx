@@ -21,15 +21,15 @@ interface Action {
 }
 
 const initialActions: Action[] = [
-  { icon: <ItalyIllustration />, name: "Italian" },
-  { icon: <GermanyIllustration />, name: "German" },
-  { icon: <GreeceIllustration />, name: "Greek" },
+  { icon: <ItalyIllustration height="1em" />, name: "IT" },
+  { icon: <GermanyIllustration height="1em" />, name: "DE" },
+  { icon: <GreeceIllustration height="1em" />, name: "GR" },
 ];
 
 const PlaygroundSpeedDial: React.FC = () => {
   const initialMainIcon: Action = {
     icon: <EnglishIllustration />,
-    name: "English",
+    name: "EN",
   };
 
   const [mainIcon, setMainIcon] = useState(initialMainIcon);
