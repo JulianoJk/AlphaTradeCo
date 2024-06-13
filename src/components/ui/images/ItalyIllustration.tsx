@@ -4,7 +4,7 @@ const ItalyIllustration = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={props.width || "3em"}
-    height={props.height || "2em"}
+    height={props.height || "1.8em"}
     viewBox="0 0 3 2"
     {...props}
   >

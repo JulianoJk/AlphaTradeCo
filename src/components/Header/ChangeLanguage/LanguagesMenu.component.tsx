@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
-import EnglishIllustration from "../ui/images/EnglishIllustration";
+import EnglishIllustration from "../../ui/images/EnglishIllustration";
 
 interface LanguagesMenuProps {
   isMobile?: boolean;

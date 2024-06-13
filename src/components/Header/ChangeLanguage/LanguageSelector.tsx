@@ -3,10 +3,10 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
-import EnglishIllustration from "../ui/images/EnglishIllustration";
-import GermanyIllustration from "../ui/images/GermanyIllustration";
-import ItalyIllustration from "../ui/images/ItalyIllustration";
-import GreeceIllustration from "../ui/images/GreeceIllustration";
+import EnglishIllustration from "../../ui/images/EnglishIllustration";
+import GermanyIllustration from "../../ui/images/GermanyIllustration";
+import ItalyIllustration from "../../ui/images/ItalyIllustration";
+import GreeceIllustration from "../../ui/images/GreeceIllustration";
 
 const StyledSpeedDial = styled(SpeedDial)(({ theme }) => ({
   position: "absolute",
@@ -24,7 +24,6 @@ export default function PlaygroundSpeedDial() {
   const [mainIcon, setMainIcon] = useState(<EnglishIllustration />);
   const [actions, setActions] = React.useState(initialActions);
   const [open, setOpen] = React.useState(false);
-
   const handleActionClick = (actionIndex: number) => {
     const newActions = [...actions];
     const clickedAction = newActions[actionIndex];
@@ -33,7 +32,7 @@ export default function PlaygroundSpeedDial() {
     newActions[actionIndex] = { icon: mainIcon, name: "SpeedDialIcon" };
     setMainIcon(clickedAction.icon);
     setActions(newActions);
-    setOpen(false); // Close the SpeedDial after an action is clicked
+    setOpen(false);
   };
 
   const handleSpeedDialOpen = () => {
@@ -41,7 +40,6 @@ export default function PlaygroundSpeedDial() {
   };
 
   const handleSpeedDialClose = (event: MouseEvent) => {
-    // Close only if the click is outside the SpeedDial or an action is clicked
     if (
       (event.target as HTMLElement).closest(".MuiSpeedDial-fab") === null &&
       (event.target as HTMLElement).closest(".MuiSpeedDialAction-fab") === null
@@ -69,7 +67,7 @@ export default function PlaygroundSpeedDial() {
               bgcolor: "transparent",
               boxShadow: "none",
               "&:hover": {
-                bgcolor: "red",
+                bgcolor: "transparent",
                 borderRadius: "3px",
                 height: "3.5em",
                 width: "4em",
@@ -85,7 +83,6 @@ export default function PlaygroundSpeedDial() {
             <SpeedDialAction
               key={`${action.name}-${index}`}
               icon={action.icon}
-              tooltipTitle={action.name}
               onClick={() => handleActionClick(index)}
               FabProps={{
                 sx: {

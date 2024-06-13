@@ -23,8 +23,8 @@ import { useStyles } from "./Header.styles";
 import logoOne from "../../assets/logoOne.jpg";
 import { useAppState } from "../context/AppContext";
 
-import LanguagesMenu from "./LanguagesMenu.component";
-import PlaygroundSpeedDial from "./Demo";
+import LanguagesMenu from "./ChangeLanguage/LanguagesMenu.component";
+import PlaygroundSpeedDial from "./ChangeLanguage/LanguageSelector";
 
 interface AppAppBarProps {
   toggleColorMode: () => void;
