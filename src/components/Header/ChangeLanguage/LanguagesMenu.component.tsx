@@ -62,7 +62,9 @@ const LanguagesMenu: React.FC = () => {
               backgroundColor: "transparent",
               width: "100%",
               borderRadius: "6px",
-              border: "2px solid #6f6855",
+              border:
+                mode === "dark" ? "2px solid #68665f" : "2px solid #c0c0b5",
+
               marginTop: "-4px",
             }}
           >
@@ -73,7 +75,7 @@ const LanguagesMenu: React.FC = () => {
                     borderRadius: "10em",
                     "&.MuiMenuItem-root:hover": {
                       borderRadius: "0.2em",
-                      backgroundColor: mode === "light" ? "#a1a1a0" : "#444444",
+                      backgroundColor: mode === "light" ? "#9d9c9c70" : "#444444",
                       //   #
                     },
                   }}

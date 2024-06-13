@@ -21,9 +21,9 @@ interface Action {
 }
 
 const initialActions: Action[] = [
-  { icon: <ItalyIllustration height="1em" />, name: "IT" },
-  { icon: <GermanyIllustration height="1em" />, name: "DE" },
-  { icon: <GreeceIllustration height="1em" />, name: "GR" },
+  { icon: <ItalyIllustration />, name: "IT" },
+  { icon: <GermanyIllustration />, name: "DE" },
+  { icon: <GreeceIllustration />, name: "GR" },
 ];
 
 const PlaygroundSpeedDial: React.FC = () => {
