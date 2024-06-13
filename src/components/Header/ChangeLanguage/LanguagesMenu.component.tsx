@@ -51,8 +51,7 @@ const LanguagesMenu = ({ isMobile = false }: LanguagesMenuProps) => {
         open={open}
         onClose={handleClose}
         onClick={handleClose}
-        PaperProps={{
-          elevation: 0,
+        MenuListProps={{
           sx: {
             overflow: "visible",
             filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",

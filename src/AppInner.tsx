@@ -19,6 +19,33 @@ export default function AppInner() {
         default: mode === "dark" ? "#242424" : "#F5F5DC",
       },
     },
+    components: {
+      MuiList: {
+        styleOverrides: {
+          root: {
+            backgroundColor: "#242424",
+            fontSize: "1px",
+            fontWeight: "bold",
+          },
+        },
+        defaultProps: {
+          dense: true, // Example default prop
+        },
+      },
+
+      MuiTooltip: {
+        styleOverrides: {
+          tooltip: {
+            backgroundColor: "transparent",
+            color: mode === "dark" ? "#ffffff" : "#000000",
+            fontSize: "0.875rem",
+          },
+        },
+        defaultProps: {
+          arrow: true, // Example default prop
+        },
+      },
+    },
   });
 
   const toggleColorMode = () => {
