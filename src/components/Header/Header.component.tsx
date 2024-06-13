@@ -24,6 +24,7 @@ import logoOne from "../../assets/logoOne.jpg";
 import { useAppState } from "../context/AppContext";
 
 import LanguagesMenu from "./LanguagesMenu.component";
+import PlaygroundSpeedDial from "./Demo";
 
 interface AppAppBarProps {
   toggleColorMode: () => void;
@@ -230,7 +231,7 @@ const Header = ({ toggleColorMode }: AppAppBarProps) => {
                   }}
                 >
                   {/* TODO!: In here, make it so the languages open in a row instead of a selector. make a button which like in menu, will open in row and show/hide the image languages and below that will have the name of the icon. <UK> bellow English, <Germany> German */}
-                  <LanguagesMenu />
+                  <PlaygroundSpeedDial />
                 </Box>
               </Box>
             </Drawer>
