@@ -1,7 +1,6 @@
 import { PaletteMode } from "@mui/material";
 import React, { useContext, useReducer } from "react";
 
-// import { ColorScheme } from '@mantine/core';
 interface IAppStateContext {
   mode: PaletteMode;
 }

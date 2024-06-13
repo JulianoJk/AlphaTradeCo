@@ -1,4 +1,4 @@
-import { PaletteMode, Tooltip } from "@mui/material";
+import { PaletteMode } from "@mui/material";
 import WbSunnyRoundedIcon from "@mui/icons-material/WbSunnyRounded";
 import ModeNightOutlinedIcon from "@mui/icons-material/ModeNightOutlined";
 import MenuButton from "./MenuButton.component";
