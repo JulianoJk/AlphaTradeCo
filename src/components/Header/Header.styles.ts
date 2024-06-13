@@ -33,7 +33,6 @@ export const useStyles = makeStyles<{ mode: string }>()(
       display: "inline-block",
       textTransform: "uppercase",
       margin: 0,
-      padding: "5px 10px", // Adjust padding for spacing
       backgroundImage: `linear-gradient(to right, ${
         mode === "dark"
           ? theme.palette.primary.light
@@ -47,10 +46,15 @@ export const useStyles = makeStyles<{ mode: string }>()(
       backgroundPosition: "-100%",
       WebkitBackgroundClip: "text",
       WebkitTextFillColor: "transparent",
-      transition: "all 0.3s ease-in-out",
+      transition: "all 0.4s ease-in-out",
       "&:before": {
         content: '""',
-        background: `${mode === "dark" ? "#EFE2BA" : "#9d6d10"}`,
+        background: `${
+          mode === "dark"
+            ? theme.palette.primary.light
+            : theme.palette.primary.dark
+        }`,
+
         display: "block",
         position: "absolute",
         bottom: "-3px",

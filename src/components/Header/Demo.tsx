@@ -2,28 +2,26 @@ import React, { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import SpeedDial from "@mui/material/SpeedDial";
-import SpeedDialIcon from "@mui/material/SpeedDialIcon";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
-import FileCopyIcon from "@mui/icons-material/FileCopyOutlined";
-import SaveIcon from "@mui/icons-material/Save";
-import PrintIcon from "@mui/icons-material/Print";
-import ShareIcon from "@mui/icons-material/Share";
+import EnglishIllustration from "../ui/images/EnglishIllustration";
+import GermanyIllustration from "../ui/images/GermanyIllustration";
+import ItalyIllustration from "../ui/images/ItalyIllustration";
+import GreeceIllustration from "../ui/images/GreeceIllustration";
 
 const StyledSpeedDial = styled(SpeedDial)(({ theme }) => ({
   position: "absolute",
   bottom: theme.spacing(2),
-  left: theme.spacing(2),
+  left: theme.spacing(1),
 }));
 
 const initialActions = [
-  { icon: <FileCopyIcon />, name: "Copy" },
-  { icon: <SaveIcon />, name: "Save" },
-  { icon: <PrintIcon />, name: "Print" },
-  { icon: <ShareIcon />, name: "Share" },
+  { icon: <GermanyIllustration />, name: "German" },
+  { icon: <ItalyIllustration />, name: "Italian" },
+  { icon: <GreeceIllustration />, name: "Greek" },
 ];
 
 export default function PlaygroundSpeedDial() {
-  const [mainIcon, setMainIcon] = useState(<SpeedDialIcon />);
+  const [mainIcon, setMainIcon] = useState(<EnglishIllustration />);
   const [actions, setActions] = React.useState(initialActions);
   const [open, setOpen] = React.useState(false);
 
@@ -62,10 +60,23 @@ export default function PlaygroundSpeedDial() {
 
   return (
     <Box sx={{ transform: "translateZ(0px)", flexGrow: 1 }}>
-      <Box sx={{ position: "relative", mt: 3, height: 320 }}>
+      <Box sx={{ position: "relative", mt: 3 }}>
         <StyledSpeedDial
           ariaLabel="SpeedDial playground example"
           icon={mainIcon}
+          FabProps={{
+            sx: {
+              bgcolor: "transparent",
+              boxShadow: "none",
+              "&:hover": {
+                bgcolor: "red",
+                borderRadius: "3px",
+                height: "3.5em",
+                width: "4em",
+                boxShadow: "none",
+              },
+            },
+          }}
           direction="right"
           open={open}
           onClick={open ? () => setOpen(false) : handleSpeedDialOpen}
@@ -76,6 +87,16 @@ export default function PlaygroundSpeedDial() {
               icon={action.icon}
               tooltipTitle={action.name}
               onClick={() => handleActionClick(index)}
+              FabProps={{
+                sx: {
+                  bgcolor: "transparent",
+                  boxShadow: "none",
+                  "&:hover": {
+                    bgcolor: "transparent",
+                    boxShadow: "none",
+                  },
+                },
+              }}
             />
           ))}
         </StyledSpeedDial>

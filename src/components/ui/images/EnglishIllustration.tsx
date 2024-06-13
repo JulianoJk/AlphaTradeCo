@@ -7,8 +7,8 @@ const EnglishIllustration = (props: SVGProps<SVGSVGElement>) => (
     x={0}
     y={0}
     viewBox="0 0 55.2 38.4"
-    width="1em"
-    height="1em"
+    width={props.width || "3em"}
+    height={props.height || "2em"}
     {...props}
   >
     <style>{".st1{fill:#c8102e}.st2{fill:#012169}"}</style>

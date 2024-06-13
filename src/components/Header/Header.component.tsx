@@ -227,10 +227,8 @@ const Header = ({ toggleColorMode }: AppAppBarProps) => {
                     mt: "auto",
                     display: "flex",
                     alignItems: "center",
-                    p: 2,
                   }}
                 >
-                  {/* TODO!: In here, make it so the languages open in a row instead of a selector. make a button which like in menu, will open in row and show/hide the image languages and below that will have the name of the icon. <UK> bellow English, <Germany> German */}
                   <PlaygroundSpeedDial />
                 </Box>
               </Box>
