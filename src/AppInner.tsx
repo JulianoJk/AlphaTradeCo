@@ -16,14 +16,14 @@ export default function AppInner() {
     palette: {
       ...theme.palette,
       background: {
-        default: mode === "dark" ? "#242424" : "#F5F5DC",
+        default: mode === "dark" ? "#1F2937" : "#F5F5DC",
       },
     },
     components: {
       MuiList: {
         styleOverrides: {
           root: {
-            backgroundColor: mode === "light" ? "#c3c3bb87" : "#242424",
+            backgroundColor: mode === "light" ? "#d5d5d0" : "#242424",
             fontSize: "1px",
             fontWeight: "bold",
             borderRadius: "4px",

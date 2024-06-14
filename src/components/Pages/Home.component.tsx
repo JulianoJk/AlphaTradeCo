@@ -1,25 +1,31 @@
-import { Paper, Typography, useTheme } from "@mui/material";
-import useModeTheme from "../../hooks/useModeTheme";
+import { Box, Grid } from "@mui/material";
 
 const Home = () => {
-  const theme = useTheme();
-  const backgroundColorss = useModeTheme(
-    theme.palette.grey[500],
-    theme.palette.grey[100]
-  ); // Use actual color values
-
   return (
-    <Paper
+    <Box
       sx={{
-        backgroundColor: `${backgroundColorss}!important`,
-
-        marginTop: 20,
+        marginTop: "14vh",
+        width: "90%",
+        height: "100vh",
       }}
     >
-      <Typography color={theme.palette.primary.main} variant="h2">
-        We create a Stable Ground For Successful Business Development
-      </Typography>
-    </Paper>
+      <Grid container spacing={2}>
+        {/* <Paper>
+          <Grid item xs={8}>
+            <Typography color={theme.palette.primary.main} variant="h2">
+              We create a Stable Ground For Successful Business Development
+            </Typography>
+          </Grid>
+        </Paper>
+        <Paper>
+          <Grid item xs={4}>
+            <Typography color={theme.palette.primary.main} variant="h2">
+              We create a Stable Ground For Successful Business Development
+            </Typography>
+          </Grid>
+        </Paper> */}
+      </Grid>
+    </Box>
   );
 };
 

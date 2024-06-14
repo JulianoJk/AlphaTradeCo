@@ -1,4 +1,4 @@
-import React, { useState, JSX } from "react";
+import React, { useState, useEffect, useRef, JSX } from "react";
 import Tooltip from "@mui/material/Tooltip";
 import {
   Box,
@@ -33,6 +33,7 @@ const LanguagesMenu: React.FC = () => {
     name: "EN",
   });
   const [actions, setActions] = useState<Action[]>(initialActions);
+  const tooltipRef = useRef<HTMLDivElement | null>(null);
 
   const handleClick = (actionIndex: number) => {
     const newActions = [...actions];
@@ -47,6 +48,22 @@ const LanguagesMenu: React.FC = () => {
     setActions(newActions);
     setOpen(false);
   };
+
+  const handleOutsideClick = (event: MouseEvent) => {
+    if (
+      tooltipRef.current &&
+      !tooltipRef.current.contains(event.target as Node)
+    ) {
+      setOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
 
   return (
     <>
@@ -64,9 +81,9 @@ const LanguagesMenu: React.FC = () => {
               borderRadius: "6px",
               border:
                 mode === "dark" ? "2px solid #68665f" : "2px solid #c0c0b5",
-
               marginTop: "-4px",
             }}
+            ref={tooltipRef}
           >
             <List>
               {actions.map((action, index) => (
@@ -75,8 +92,8 @@ const LanguagesMenu: React.FC = () => {
                     borderRadius: "10em",
                     "&.MuiMenuItem-root:hover": {
                       borderRadius: "0.2em",
-                      backgroundColor: mode === "light" ? "#9d9c9c70" : "#444444",
-                      //   #
+                      backgroundColor:
+                        mode === "light" ? "#9d9c9c70" : "#444444",
                     },
                   }}
                   key={action.name}
@@ -109,9 +126,15 @@ const LanguagesMenu: React.FC = () => {
           aria-expanded={open ? "true" : undefined}
           disableRipple
           disableTouchRipple
-          sx={{ ml: -2 }}
+          sx={{ marginLeft: "3px" }}
         >
-          <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              width: "2em",
+            }}
+          >
             {mainIcon.icon}
           </Box>
         </IconButton>
