@@ -1,14 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useRef } from "react";
 import Globe from "react-globe.gl";
-import { Box, useMediaQuery } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
-import geoData from "./geo.json"; // Import the local geo.json file
+import { Box } from "@mui/material";
+import geoData from "./geo.json";
 import globeDay from "../../assets/globeDay.jpeg";
+import globeNight from "../../assets/globeEarthNight.jpeg";
+import { useAppState } from "../context/AppContext";
+
 const GlobeComponent: React.FC = () => {
   const globeEl = useRef<any>();
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up("sm"));
+  // const theme = useTheme();
+  const { mode } = useAppState();
+  // const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
   const countries = geoData.features;
 
@@ -36,8 +39,8 @@ const GlobeComponent: React.FC = () => {
   return (
     <Box
       sx={{
-        width: "100%",
-        height: matches ? "600px" : "300px", // Responsive height
+        // width: matches ? "37em" : "18em",
+        // height: matches ? "37em" : "18em", // Responsive height
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -45,17 +48,21 @@ const GlobeComponent: React.FC = () => {
     >
       <Globe
         ref={globeEl}
-        globeImageUrl={globeDay}
-        width={matches ? 600 : 300} // Responsive width
-        height={matches ? 600 : 300} // Responsive height
+        globeImageUrl={mode === "dark" ? globeDay : globeNight}
+        // globeImageUrl={globeDay}
+        width={300}
+        height={300}
         backgroundColor="rgba(0, 0, 0, 0)"
         polygonsData={countries}
         polygonCapColor={(d: any) =>
           redCountries.has(d.properties.sovereignt)
-            ? "red"
-            : "rgba(200, 200, 200, 0.6)"
+            ? mode === "light"
+              ? "darkred"
+              : "lightcoral"
+            : "rgba(0, 0, 0, 0)"
         }
-        polygonStrokeColor={() => "#111"}
+        polygonStrokeColor={() => "rgba(0, 0, 0, 0)"}
+        polygonSideColor={() => "rgba(0, 0, 0, 0)"}
         polygonLabel={({ properties: d }: any) => `
           <b>${d.sovereignt}</b>
         `}
