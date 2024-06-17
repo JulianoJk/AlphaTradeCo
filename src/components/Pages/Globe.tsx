@@ -45,7 +45,7 @@ const GlobeComponent: React.FC = () => {
       <Globe
         ref={globeEl}
         globeImageUrl={globeDay}
-        width={isMobile ? 310 : 430}
+        width={isMobile ? 410 : 430}
         height={isMobile ? 310 : 430}
         backgroundColor="rgba(0, 0, 0, 0)"
         polygonsData={countries}

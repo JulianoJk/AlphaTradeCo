@@ -10,7 +10,15 @@ const LangingPage = () => {
   const isMobile = useMediaQuery("(max-width:770px)");
 
   return (
-    <Box sx={{ flexGrow: 1 }} className={classes.landPageRoot}>
+    <Box
+      sx={{
+        flexGrow: 1,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+      className={classes.landPageRoot}
+    >
       <Grid container spacing={2}>
         <Grid item xs={12} md={isMobile ? 12 : 7}>
           <Paper elevation={0}>
@@ -21,8 +29,16 @@ const LangingPage = () => {
           </Paper>
         </Grid>
         <Grid item xs={12} md={isMobile ? 12 : 5}>
-          <Paper elevation={0}>
-            <Typography>This is sample landing Page</Typography>
+          <Paper
+            elevation={0}
+            sx={{ width: "25em", height: "25em", borderRadius: "0.8em" }}
+          >
+            <img
+              style={{ borderRadius: "0.8em" }}
+              draggable={false}
+              src="https://picsum.photos/400/400"
+              alt="Random image to display"
+            />
           </Paper>
         </Grid>
       </Grid>

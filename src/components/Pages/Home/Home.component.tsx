@@ -1,3 +1,4 @@
+import IntrestAreas from "../IntrestAreas/IntrestAreas.component";
 import GlobePage from "./GlobePage.component";
 import LangingPage from "./LandingPage.component";
 
@@ -15,6 +16,7 @@ const Home = () => {
     <>
       <LangingPage />
       <GlobePage />
+      <IntrestAreas />
     </>
   );
 };
