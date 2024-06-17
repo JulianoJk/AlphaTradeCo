@@ -1,12 +1,11 @@
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./components/Pages/Home.component";
+import Home from "./components/Pages/Home/Home.component";
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Header from "./components/Header/Header.component";
 import AboutUs from "./components/Pages/AboutUs/AboutUs.component";
 import { theme } from "./components/ui/theme/Theme";
 import { useAppDispatch, useAppState } from "./components/context/AppContext";
-import GlobeComponent from "./components/Pages/Globe";
 
 export default function AppInner() {
   const { mode } = useAppState();
@@ -66,7 +65,6 @@ export default function AppInner() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about-us/" element={<AboutUs />} />
-          <Route path="/faq/" element={<GlobeComponent />} />
           <Route path="/*" element={<Home />} />
         </Routes>
       </Router>
