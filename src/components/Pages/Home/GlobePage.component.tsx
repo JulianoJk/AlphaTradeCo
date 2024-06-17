@@ -18,7 +18,7 @@ const GlobePage = () => {
       }}
     >
       <Grid item xs={12} md={6}>
-        <Paper className={classes.paperRoot}>
+        <Paper className={classes.globePaperRoot}>
           <GlobeComponent />
           <Typography
             variant="h5"
@@ -53,7 +53,7 @@ const GlobePage = () => {
           {/* Top Row */}
           <Grid item container spacing={2}>
             <Grid item xs={6}>
-              <Paper className={classes.paperRoot}>
+              <Paper className={classes.globePaperRoot}>
                 <GroupsIcon fontSize="large" />
                 <Typography
                   variant="body2"
@@ -70,7 +70,7 @@ const GlobePage = () => {
               </Paper>
             </Grid>
             <Grid item xs={6}>
-              <Paper className={classes.paperRoot}>
+              <Paper className={classes.globePaperRoot}>
                 <GroupsIcon fontSize="large" />
                 <Typography
                   variant="body2"
@@ -91,7 +91,7 @@ const GlobePage = () => {
           {/* Bottom Row */}
           <Grid item container spacing={2}>
             <Grid item xs={6}>
-              <Paper className={classes.paperRoot}>
+              <Paper className={classes.globePaperRoot}>
                 <GroupsIcon fontSize="large" />
                 <Typography
                   variant="body2"
@@ -108,7 +108,7 @@ const GlobePage = () => {
               </Paper>
             </Grid>
             <Grid item xs={6}>
-              <Paper className={classes.paperRoot}>
+              <Paper className={classes.globePaperRoot}>
                 <GroupsIcon fontSize="large" />
                 <Typography
                   variant="body2"

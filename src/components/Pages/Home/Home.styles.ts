@@ -2,7 +2,19 @@ import { makeStyles } from "tss-react/mui";
 
 export const useStyles = makeStyles()(() => {
   return {
-    paperRoot: {
+    landPageRoot: {
+      backgroundColor: "transparent",
+      height: "100vh",
+      width: "100vw",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      padding: "1em",
+      boxSizing: "border-box",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    },
+    globePaperRoot: {
       backgroundColor: "#1b2430",
       borderRadius: "1em",
       marginTop: "14vh",

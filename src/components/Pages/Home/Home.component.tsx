@@ -1,7 +1,5 @@
-// import Box from "@mui/material/Box";
-// import LangingPage from "./LandingPage.component";
-// import GlobeComponent from "../Globe";
 import GlobePage from "./GlobePage.component";
+import LangingPage from "./LandingPage.component";
 
 const Home = () => {
   return (
@@ -14,7 +12,10 @@ const Home = () => {
     //     <GlobeComponent />
     //   </Box>
     // </Box>
-    <GlobePage></GlobePage>
+    <>
+      <LangingPage />
+      <GlobePage />
+    </>
   );
 };
 
