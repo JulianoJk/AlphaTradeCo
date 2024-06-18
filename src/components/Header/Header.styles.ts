@@ -23,7 +23,7 @@ export const useStyles = makeStyles<{ mode: string }>()(
       textTransform: "capitalize",
     },
     appBarRoot: {
-      backgroundColor: "#202020",
+      backgroundColor: "#242424",
       border: "1px solid #2d3138",
       borderRadius: "1em",
       height: "4em",

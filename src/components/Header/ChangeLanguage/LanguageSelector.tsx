@@ -8,6 +8,7 @@ import GermanyIllustration from "../../ui/images/GermanyIllustration";
 import ItalyIllustration from "../../ui/images/ItalyIllustration";
 import GreeceIllustration from "../../ui/images/GreeceIllustration";
 import Typography from "@mui/material/Typography";
+import useModeTheme from "../../../hooks/useModeTheme";
 
 const StyledSpeedDial = styled(SpeedDial)(({ theme }) => ({
   position: "absolute",
@@ -36,7 +37,10 @@ const PlaygroundSpeedDial: React.FC = () => {
   const [actions, setActions] = useState<Action[]>(initialActions);
   const [open, setOpen] = useState(false);
   const theme = useTheme();
-
+  const menuTextColor = useModeTheme(
+    theme.palette.common.white,
+    theme.palette.common.black
+  );
   const handleActionClick = (actionIndex: number) => {
     const newActions = [...actions];
     const clickedAction = newActions[actionIndex];
@@ -86,10 +90,7 @@ const PlaygroundSpeedDial: React.FC = () => {
               }}
             >
               {mainIcon.icon}
-              <Typography
-                sx={{ mt: 1, color: theme.palette.common.white }}
-                variant="body2"
-              >
+              <Typography sx={{ mt: 1, color: menuTextColor }} variant="body2">
                 {mainIcon.name}
               </Typography>
             </Box>
@@ -126,7 +127,7 @@ const PlaygroundSpeedDial: React.FC = () => {
                 >
                   {action.icon}
                   <Typography
-                    sx={{ mt: 1, color: theme.palette.common.white }}
+                    sx={{ mt: 1, color: menuTextColor }}
                     variant="body2"
                   >
                     {action.name}
