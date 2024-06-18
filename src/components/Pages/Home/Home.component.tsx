@@ -1,6 +1,6 @@
 import IntrestAreas from "../IntrestAreas/IntrestAreas.component";
 import GlobePage from "./GlobePage.component";
-import LangingPage from "./LandingPage.component";
+import LandingPage from "./LandingPage.component";
 
 const Home = () => {
   return (
@@ -14,7 +14,7 @@ const Home = () => {
     //   </Box>
     // </Box>
     <>
-      <LangingPage />
+      <LandingPage />
       <GlobePage />
       <IntrestAreas />
     </>

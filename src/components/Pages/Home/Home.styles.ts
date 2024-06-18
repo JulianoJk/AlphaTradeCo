@@ -19,12 +19,31 @@ export const useStyles = makeStyles()(() => {
       borderRadius: "1em",
       marginTop: "14vh",
       width: "90%",
-      height: "auto", // Let height be auto to adjust based on content
-      padding: "1em", // Add padding for spacing
+      height: "auto",
+      padding: "1em",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
+    },
+    areasInterestPaper: {
+      height: "15em",
+      padding: "1em",
+      backgroundColor: "#1c1b1b",
+      boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+      borderRadius: "8px",
+      textAlign: "center",
+      color: "#C9C9C9",
+      transition: "transform 0.2s",
+      "&:hover": {
+        transform: "scale(1.05)",
+      },
+      cursor: "default",
+
+      "@media (max-width: 600px)": {
+        marginBottom: "1em",
+        height: "auto",
+      },
     },
   };
 });

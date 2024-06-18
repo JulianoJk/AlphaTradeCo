@@ -1,12 +1,12 @@
+import { CssBaseline } from "@mui/material";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Pages/Home/Home.component";
-import { CssBaseline } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Header from "./components/Header/Header.component";
 import AboutUs from "./components/Pages/AboutUs/AboutUs.component";
 import { theme } from "./components/ui/theme/Theme";
 import { useAppDispatch, useAppState } from "./components/context/AppContext";
-
+import HoverExpandPapers from "./components/Pages/Home/HoverActionDemo/HoverExpandPapers.component";
 export default function AppInner() {
   const { mode } = useAppState();
   const dispatch = useAppDispatch();
@@ -65,6 +65,7 @@ export default function AppInner() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about-us/" element={<AboutUs />} />
+          <Route path="/FAQ/" element={<HoverExpandPapers />} />
           <Route path="/*" element={<Home />} />
         </Routes>
       </Router>

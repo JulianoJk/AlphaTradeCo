@@ -37,33 +37,20 @@ const interestAreas = [
 ];
 
 const IntrestAreas = () => {
-  const { classes } = useStyles();
+  const { classes, cx } = useStyles();
+
   return (
     <Grid container spacing={2} className={classes.landPageRoot}>
       {interestAreas.map((area, index) => (
-        <Grid item xs={4} key={index}>
+        <Grid item xs={12} sm={6} md={4} key={index}>
           <Paper
-            className={classes.globePaperRoot}
-            sx={{
-              height: "15em !important", // Fixed height
-            //   width: "10em !important", // Fixed width
-              // Add any additional styling here
-            }}
+            className={cx(classes.globePaperRoot, classes.areasInterestPaper)}
+            sx={{}}
           >
-            <Typography variant="h4" sx={{ color: "#C9C9C9" }}>
+            <Typography variant="h4" gutterBottom>
               {area.title}
             </Typography>
-            <Typography
-              variant="body2"
-              sx={{
-                fontSize: "14px",
-                lineHeight: "20px",
-                color: "#C9C9C9",
-                marginTop: "0.5em",
-              }}
-            >
-              {area.description}
-            </Typography>
+            <Typography variant="body2">{area.description}</Typography>
           </Paper>
         </Grid>
       ))}
