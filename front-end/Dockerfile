@@ -1,25 +1,25 @@
-# Use an official Node.js runtime as the base image
 FROM node:18-alpine
 
-# Sets the working directory
-WORKDIR /usr/src/app
+# sets working directory
+WORKDIR /usr/src/app/front_end
 
-# Copy the package.json and yarn.lock files
+# copy the package and lock file
 COPY package.json yarn.lock ./
 
+# install dependencies
+RUN yarn install && yarn cache clean
+
+# add additional dependencies
 RUN yarn add @mui/icons-material
 
-# Install dependencies
-RUN yarn install
-
-# Copy the rest of the application files
+# copy the rest of the project files
 COPY . .
 
-# Build the application
-RUN yarn build
+# copy tsconfig.json (or tsconfig.node.json) if needed
+COPY tsconfig.json ./
 
-# Expose port 4173, Vite's default preview port
+# exposes port 5174
 EXPOSE 5173
 
-# Serve the built application with Vite's preview command
-CMD ["yarn", "dev", "--host"]
+# runs the command npm start
+CMD ["yarn", "dev"]

@@ -1,8 +1,11 @@
+// vite.config.ts or vite.config.js
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "/AlphaTradeCo/", // Set this to your repository name
+  server: {
+    port: 5173, // Ensure this matches the container's exposed port
+    host: "0.0.0.0", // Allows access from outside the container
+  },
 });

@@ -22,9 +22,10 @@ import useScrollDirection from "../../hooks/useScrollDirection";
 import { useStyles } from "./Header.styles";
 import logoOne from "../../assets/logoOne.jpg";
 import { useAppState } from "../context/AppContext";
-
 import LanguagesMenu from "./ChangeLanguage/LanguagesMenu.component";
 import PlaygroundSpeedDial from "./ChangeLanguage/LanguageSelector";
+import { useQuery } from "@tanstack/react-query";
+import { fetchMenuItems, IMenuItem, IApiError } from "./api"; // Assuming api.ts contains the fetchMenuItems function
 
 interface AppAppBarProps {
   toggleColorMode: () => void;
@@ -32,6 +33,7 @@ interface AppAppBarProps {
 
 const Header = ({ toggleColorMode }: AppAppBarProps) => {
   const [open, setOpen] = useState(false);
+  const [languageCode, setLanguageCode] = useState("en"); // Default language code
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
@@ -39,10 +41,22 @@ const Header = ({ toggleColorMode }: AppAppBarProps) => {
   const { mode } = useAppState();
   const { classes } = useStyles({ mode });
 
+  const {
+    data: menuItems,
+    error,
+    isLoading,
+  } = useQuery<IMenuItem[], IApiError>(["menuItems", languageCode], () =>
+    fetchMenuItems(languageCode)
+  );
+
   const toggleDrawer = (newOpen: boolean) => () => setOpen(newOpen);
   const navigateToSection = (sectionId: string) => {
     navigate(sectionId);
     setOpen(false);
+  };
+
+  const handleLanguageChange = (newLanguageCode: string) => {
+    setLanguageCode(newLanguageCode);
   };
 
   const appBarStyles = {
@@ -79,18 +93,9 @@ const Header = ({ toggleColorMode }: AppAppBarProps) => {
     borderColor: "divider",
   };
 
-  const menuItems = [
-    { path: "/", label: "Home" },
-    { path: "/products/", label: "Products" },
-    { path: "/contact/", label: "Contact" },
-    { path: "/about-us/", label: "About us" },
-    { path: "/about-us/sustainability/", label: "Sustainability" },
-    { path: "/faq/", label: "FAQ" },
-  ];
-
   const renderButtons = () =>
-    menuItems.map((item, index) => {
-      const isActive = location.pathname === item.path;
+    menuItems?.map((item, index) => {
+      const isActive = location.pathname === item.key;
       return (
         <Button
           key={index}
@@ -108,30 +113,30 @@ const Header = ({ toggleColorMode }: AppAppBarProps) => {
               },
             },
           }}
-          onClick={() => navigateToSection(item.path)}
+          onClick={() => navigateToSection(item.key)}
         >
           <Typography
             color={mode === "dark" ? "#C9C9C9" : "#1c1b1b"}
             variant="body1"
           >
-            {item.label}
+            {item.translation}
           </Typography>
         </Button>
       );
     });
 
   const renderMenuItems = () =>
-    menuItems.map((item, index) => (
+    menuItems?.map((item, index) => (
       <MenuItem
         key={index}
-        onClick={() => navigateToSection(item.path)}
+        onClick={() => navigateToSection(item.key)}
         sx={{ paddingTop: "2.2em" }}
       >
         <Typography
           color={mode === "dark" ? "#C9C9C9" : "#1c1b1b"}
           variant="body1"
         >
-          {item.label}
+          {item.translation}
         </Typography>
       </MenuItem>
     ));
@@ -163,7 +168,7 @@ const Header = ({ toggleColorMode }: AppAppBarProps) => {
             }}
           >
             <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
-            <LanguagesMenu />
+            <LanguagesMenu onLanguageChange={handleLanguageChange} />
           </Box>
           <Box sx={{ display: { sm: "flex", md: "none" } }}>
             <IconButton aria-label="Menu button" onClick={toggleDrawer(true)}>
